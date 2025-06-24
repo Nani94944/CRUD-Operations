@@ -18,15 +18,29 @@ namespace CRUD_Operations.Controllers
         [HttpPost ( "login" )]
         public async Task<IActionResult> Login ( LoginDto loginDto )
         {
-            var token = await _authService.Login ( loginDto );
-            return Ok ( new { token } );
+            try
+            {
+                var token = await _authService.Login ( loginDto );
+                return LocalizedOk( "LoginSuccess" , new { token } );
+            }
+            catch (Exception ex)
+            {
+                return LocalizedBadRequest( ex.Message );
+            }
         }
 
         [HttpPost ( "register" )]
         public async Task<IActionResult> Register ( RegisterDto registerDto )
         {
-            var user = await _authService.Register ( registerDto );
-            return Ok ( user );
+            try
+            {
+                var user = await _authService.Register ( registerDto );
+                return LocalizedOk( "RegistrationSuccess" , user );
+            }
+            catch (Exception ex)
+            {
+                return LocalizedBadRequest( ex.Message );
+            }
         }
     }
 }

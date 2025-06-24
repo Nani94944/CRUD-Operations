@@ -1,6 +1,20 @@
-﻿namespace CRUD_Operations.Attributes
+﻿using CRUD_Operations.Services;
+using System.ComponentModel.DataAnnotations;
+
+public class LocalizedRequiredAttribute : RequiredAttribute
 {
-    public class LocalizedRequiredAttribute
+    protected override ValidationResult IsValid ( object value , ValidationContext validationContext )
     {
+        var localizationService = (LocalizationService)validationContext
+            .GetService ( typeof ( LocalizationService ) );
+
+        if (!IsValid ( value ))
+        {
+            var displayName = validationContext.DisplayName ?? validationContext.MemberName;
+            return new ValidationResult (
+                localizationService.GetLocalizedString ( "RequiredField" , displayName ) );
+        }
+
+        return ValidationResult.Success;
     }
 }

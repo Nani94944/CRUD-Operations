@@ -1,6 +1,29 @@
-﻿namespace CRUD_Operations.Helpers.Localization
-{
-    public class ApiMessages
-    {
-    }
-}
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Auth Messages -->
+  <data name="UserNotFound" xml:space="preserve">
+    <value>المستخدم غير موجود</value>
+  </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>اسم المستخدم أو كلمة المرور غير صحيحة</value>
+  </data>
+  <data name="RegistrationSuccess" xml:space="preserve">
+    <value>تم التسجيل بنجاح</value>
+  </data>
+  
+  <!-- Validation Messages -->
+  <data name="RequiredField" xml:space="preserve">
+    <value>{0} مطلوب</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>الرجاء إدخال عنوان بريد إلكتروني صحيح</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>يجب أن تكون كلمة المرور بين {0} و {1} حرفًا</value>
+  </data>
+  
+  <!-- Success Messages -->
+  <data name="UserCreated" xml:space="preserve">
+    <value>تم إنشاء المستخدم بنجاح</value>
+  </data>
+</root>

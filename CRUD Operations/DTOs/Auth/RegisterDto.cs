@@ -1,21 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CRUD_Operations.DTOs.Auth
+public class RegisterDto
 {
-    public class RegisterDto
-    {
-        [Required]
-        public string Username { get; set; }
+    [LocalizedRequired]
+    public string Username { get; set; }
 
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+    [LocalizedRequired]
+    [EmailAddress ( ErrorMessage = "InvalidEmail" )]
+    public string Email { get; set; }
 
-        [Required]
-        [StringLength ( 100 , MinimumLength = 6 )]
-        public string Password { get; set; }
+    [LocalizedRequired]
+    [StringLength ( 100 , MinimumLength = 6 , ErrorMessage = "PasswordLength" )]
+    public string Password { get; set; }
 
-        [Required]
-        public int RoleId { get; set; }
-    }
+    [LocalizedRequired]
+    public int RoleId { get; set; }
 }

@@ -1,24 +1,17 @@
 using CRUD_Operations.Data;
 using CRUD_Operations.Extensions;
+using CRUD_Operations.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder ( args );
+// Add to services
 builder.Services.AddLocalization ( options => options.ResourcesPath = "Resources" );
 
-builder.Services.Configure<RequestLocalizationOptions> ( options =>
-{
-    var supportedCultures = new[] { "en" , "ar" };
-    options.SetDefaultCulture ( "en" )
-           .AddSupportedCultures ( supportedCultures )
-           .AddSupportedUICultures ( supportedCultures );
-
-    options.ApplyCurrentCultureToResponseHeaders = true;
-} );
-
-// Add to middleware pipeline (before authorization)
+// Add the localization service
+builder.Services.AddSingleton<LocalizationService> ();
 // Add services to the container.
 builder.Services.AddControllers ();
 builder.Services.AddApplicationServices ( builder.Configuration );
@@ -48,7 +41,6 @@ if (app.Environment.IsDevelopment ())
     app.UseSwaggerUI ();
 }
 
-app.UseRequestLocalization ();
 app.UseMiddleware<ExceptionMiddleware> ();
 
 app.UseHttpsRedirection ();

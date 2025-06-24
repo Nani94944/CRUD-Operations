@@ -1,20 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
+﻿using CRUD_Operations.Services;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CRUD_Operations.Controllers
+public class BaseController : ControllerBase
 {
-    public class BaseController : ControllerBase
+    private readonly LocalizationService _localization;
+
+    public BaseController ( LocalizationService localization )
     {
-        private readonly IStringLocalizer _localizer;
+        _localization = localization;
+    }
 
-        public BaseController ( IStringLocalizer localizer )
+    protected IActionResult LocalizedOk ( string messageKey , object data = null )
+    {
+        return Ok ( new
         {
-            _localizer = localizer;
-        }
+            Success = true ,
+            Message = _localization.GetLocalizedString ( messageKey ) ,
+            Data = data
+        } );
+    }
 
-        protected string Localize ( string key , params object[] args )
+    protected IActionResult LocalizedBadRequest ( string messageKey , object errors = null )
+    {
+        return BadRequest ( new
         {
-            return string.Format ( _localizer[key] , args );
-        }
+            Success = false ,
+            Message = _localization.GetLocalizedString ( messageKey ) ,
+            Errors = errors
+        } );
     }
 }
