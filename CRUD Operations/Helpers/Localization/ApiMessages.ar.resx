@@ -1,0 +1,6 @@
+﻿namespace CRUD_Operations.Helpers.Localization
+{
+    public class ApiMessages
+    {
+    }
+}

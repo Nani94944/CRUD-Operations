@@ -1,0 +1,6 @@
+﻿namespace CRUD_Operations.Resources.Controllers
+{
+    public class AuthController
+    {
+    }
+}
